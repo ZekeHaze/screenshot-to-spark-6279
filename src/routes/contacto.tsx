@@ -43,10 +43,11 @@ function Contacto() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
     const fd = Object.fromEntries(new FormData(e.currentTarget));
     const parsed = schema.safeParse({ ...fd, motivo });
     if (!parsed.success) {
-      setError(parsed.error.issues[0].message);
+      setError(parsed.error.issues[0]?.message ?? "Revisa los datos");
       return;
     }
     setError("");
@@ -62,7 +63,7 @@ function Contacto() {
       return;
     }
     setStatus("ok");
-    e.currentTarget?.reset();
+    form.reset();
   }
 
   return (
