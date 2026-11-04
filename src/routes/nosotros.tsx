@@ -102,6 +102,23 @@ function Nosotros() {
         </div>
       </section>
 
+      <section className="py-24">
+        <div className="mx-auto max-w-4xl px-5">
+          <Reveal className="text-center">
+            <h2 className="text-4xl md:text-5xl">Nuestra historia, paso a paso</h2>
+          </Reveal>
+          <ol className="mt-14 space-y-10 border-l-2 border-primary/30 pl-8">
+            {historia.map((h) => (
+              <Reveal as="li" key={h.t} className="relative">
+                <span className="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-primary ring-4 ring-background" />
+                <p className="font-display text-xl font-bold">{h.t}</p>
+                <p className="mt-2 text-muted-foreground">{h.d}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <section className="py-24 text-center">
         <Reveal className="mx-auto max-w-2xl px-5">
           <h2 className="text-4xl">Prueba el sabor de nuestra tierra</h2>
