@@ -132,11 +132,13 @@ function Nosotros() {
           </Reveal>
           <ol className="mt-14 space-y-10 border-l-2 border-primary/30 pl-8">
             {historia.map((h) => (
-              <Reveal as="li" key={h.t} className="relative">
-                <span className="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-primary ring-4 ring-background" />
-                <p className="font-display text-xl font-bold">{h.t}</p>
-                <p className="mt-2 text-muted-foreground">{h.d}</p>
-              </Reveal>
+              <li key={h.t} className="relative">
+                <Reveal>
+                  <span className="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-primary ring-4 ring-background" />
+                  <p className="font-display text-xl font-bold">{h.t}</p>
+                  <p className="mt-2 text-muted-foreground">{h.d}</p>
+                </Reveal>
+              </li>
             ))}
           </ol>
         </div>
