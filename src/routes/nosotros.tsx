@@ -35,11 +35,22 @@ function Nosotros() {
 
       <section className="mx-auto grid max-w-7xl gap-12 px-5 py-24 md:grid-cols-[1.1fr_1fr] md:items-center">
         <Reveal>
-          <h2 className="text-4xl md:text-5xl">Lo que nos dejó el abuelo</h2>
+          <p className="font-display text-lg font-bold text-primary">Nuestro origen</p>
+          <h2 className="mt-2 text-4xl md:text-5xl">Lo que nos dejó el abuelo</h2>
           <div className="mt-6 space-y-4 text-lg text-muted-foreground">
-            <p>Limonson nace del emprendimiento de una familia joven de Navojoa, Sonora.</p>
-            <p>Trabajamos cinco hectáreas de terreno ejidal heredadas de nuestro abuelo, donde producimos limón italiano Eureka.</p>
-            <p>Cada cosecha lleva el esfuerzo de la familia y el orgullo por el campo sonorense.</p>
+            <p>
+              Esta historia no empieza con nosotros: empieza con un terreno ejidal en Navojoa,
+              Sonora, que nuestro abuelo trabajó con sus propias manos durante años.
+            </p>
+            <p>
+              Aprendimos de él que la tierra no se cuida con prisa. Que un árbol bien atendido
+              responde con fruto, y que una cosecha honrada abre puertas. Esas lecciones quedaron
+              grabadas en la familia tanto como las cinco hectáreas que nos dejó.
+            </p>
+            <p>
+              Hoy esas hectáreas siguen dando fruto, y cada vez que caminamos entre los surcos
+              sentimos que no solo heredamos un terreno: heredamos un compromiso.
+            </p>
           </div>
         </Reveal>
         <Reveal delay={150}>
@@ -47,6 +58,37 @@ function Nosotros() {
             <img src={canasta} alt="Cosecha de limón Eureka" loading="lazy" width={1200} height={1408} className="h-full w-full object-cover" />
           </div>
         </Reveal>
+      </section>
+
+      <section className="bg-secondary py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-[1fr_1.1fr] md:items-center">
+          <Reveal className="order-2 md:order-1">
+            <div className="photo-zoom organic-blob aspect-[4/5] shadow-2xl">
+              <img src={campo} alt="Surcos del limonar familiar" loading="lazy" width={1920} height={1088} className="h-full w-full object-cover" />
+            </div>
+          </Reveal>
+          <Reveal delay={150} className="order-1 md:order-2">
+            <p className="font-display text-lg font-bold text-primary">La nueva generación</p>
+            <h2 className="mt-2 text-4xl md:text-5xl">Una familia joven, el mismo compromiso</h2>
+            <div className="mt-6 space-y-4 text-lg text-muted-foreground">
+              <p>
+                Somos una familia joven de Navojoa que decidió quedarse en el campo. Tomamos el
+                relevo del abuelo con la misma tierra, pero con nuevas ideas: mejores prácticas de
+                cultivo, más cuidado en cada cosecha y la ilusión de llevar el limón sonorense
+                más lejos.
+              </p>
+              <p>
+                Entre reuniones de familia, madrugadas en el huerto y cosechas compartidas,
+                Limonson se volvió nuestro proyecto de vida. No es solo un negocio: es la manera
+                de honrar lo que nos dejaron y de construir algo propio para los que vienen después.
+              </p>
+              <p>
+                Cuando compras un limón Limonson, te llevas un poco de esta historia: sudor,
+                herencia y orgullo por el campo de Sonora.
+              </p>
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       <section className="bg-primary py-20">
