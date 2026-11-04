@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Clock, Home, Leaf, Droplets, ArrowRight } from "lucide-react";
 import campo from "@/assets/campo-limoneros.jpg";
-import canasta from "@/assets/limones-canasta.jpg";
-import jugo from "@/assets/limon-jugo.jpg";
+import botellas from "@/assets/limonson-botellas.jpg";
+import cocina from "@/assets/limonson-en-cocina.jpg";
 import { Reveal } from "@/components/site/Reveal";
-import { whatsappLink } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,7 +28,7 @@ function Index() {
   return (
     <>
       <section className="relative flex min-h-[100svh] items-center overflow-hidden">
-        <img src={campo} alt="Campo de limoneros en Sonora" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover animate-ken-burns" />
+        <img src={campo} alt="" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover animate-ken-burns" />
         <div className="absolute inset-0 hero-overlay" />
         <div className="relative mx-auto w-full max-w-7xl px-5 pt-24">
           <p className="mb-4 inline-block rounded-full bg-primary px-4 py-1 font-display font-bold text-primary-foreground">Navojoa, Sonora</p>
@@ -37,7 +36,7 @@ function Index() {
             El sabor del campo sonorense en cada gota
           </h1>
           <p className="mt-6 max-w-xl text-lg text-earth-foreground/90">
-            Jugo de limón italiano Eureka, 100% natural, exprimido y congelado.
+            Jugo de limón italiano Eureka, exprimido y congelado, sin ingredientes añadidos.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/productos" className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 font-display text-lg font-bold text-primary-foreground shadow-lg transition-transform hover:scale-105">
@@ -51,9 +50,9 @@ function Index() {
       </section>
 
       <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 md:grid-cols-2">
-        <Reveal>
-          <div className="photo-zoom organic-blob aspect-square shadow-2xl">
-            <img src={canasta} alt="Limones italianos Eureka frescos" loading="lazy" width={1200} height={1408} className="h-full w-full object-cover" />
+        <Reveal className="lemon-leaf drop-shadow-xl">
+          <div className="photo-zoom lemon-photo lemon-diagonal aspect-square">
+            <img src={botellas} alt="Dos botellas de jugo Limonson sostenidas en el huerto" loading="lazy" width={1080} height={1350} className="h-full w-full object-cover" />
           </div>
         </Reveal>
         <Reveal delay={150}>
@@ -87,16 +86,27 @@ function Index() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden">
-        <img src={jugo} alt="Jugo de limón recién exprimido" loading="lazy" width={1200} height={1200} className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-earth/80" />
-        <Reveal className="relative mx-auto max-w-3xl px-5 py-28 text-center">
+      <section className="lemon-texture mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:gap-16 md:py-24">
+        <Reveal>
+          <p className="font-display text-lg font-bold text-lime">Ideas de uso</p>
+          <h2 className="mt-2 text-4xl md:text-5xl">Para la cocina y la barra</h2>
+          <p className="mt-5 max-w-lg text-lg text-muted-foreground">
+            Úsalo en aderezos, marinados, limonadas y cocteles. En casa o en tu negocio, puedes
+            medir el jugo que pide cada receta y ahorrar tiempo de preparación.
+          </p>
+        </Reveal>
+        <Reveal delay={150} className="md:mx-auto md:w-full md:max-w-md">
+          <div className="photo-zoom aspect-[4/5] rounded-4xl shadow-xl">
+            <img src={cocina} alt="Jugo Limonson vertido sobre un tazón de fruta" loading="lazy" width={1080} height={1350} className="h-full w-full object-cover" />
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="bg-earth">
+        <Reveal className="mx-auto max-w-3xl px-5 py-20 text-center md:py-24">
           <h2 className="text-4xl text-earth-foreground md:text-5xl">¿Tienes un negocio o quieres distribuir Limonson?</h2>
           <p className="mt-5 text-lg text-earth-foreground/85">Platiquemos. Te atendemos directamente.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/contacto" className="rounded-full bg-primary px-7 py-4 font-display text-lg font-bold text-primary-foreground transition-transform hover:scale-105">Solicitar información</Link>
-            <a href={whatsappLink("Hola, me interesa distribuir Limonson.")} target="_blank" rel="noopener noreferrer" className="rounded-full bg-whatsapp px-7 py-4 font-display text-lg font-bold text-accent-foreground transition-transform hover:scale-105">WhatsApp</a>
-          </div>
+          <Link to="/contacto" className="mt-8 inline-block rounded-full bg-primary px-7 py-4 font-display text-lg font-bold text-primary-foreground transition-transform hover:scale-105">Solicitar información</Link>
         </Reveal>
       </section>
     </>

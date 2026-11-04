@@ -1,9 +1,8 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, MapPin, Mail, Phone, Facebook, Instagram, MessageCircle } from "lucide-react";
-import logo from "@/assets/limonson-logo.png.asset.json";
+import { Menu, X, MapPin, Mail, Phone, Instagram } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CONTACT_NAME, LOCATION, SLOGAN, whatsappLink } from "@/lib/site";
+import { CONTACT_EMAIL, CONTACT_PHONE, LOCATION, SLOGAN, SOCIAL_HANDLE } from "@/lib/site";
 
 const nav = [
   { to: "/", label: "Inicio" },
@@ -16,6 +15,8 @@ export function SiteHeader() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const solidHeader = scrolled || open || (pathname !== "/" && pathname !== "/nosotros");
 
   useEffect(() => {
     let last = window.scrollY;
@@ -33,13 +34,13 @@ export function SiteHeader() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-40 transition-all duration-500",
-        hidden && !open ? "-translate-y-full" : "translate-y-0",
-        scrolled || open ? "bg-background/95 shadow-sm backdrop-blur" : "bg-transparent",
+        hidden && !open ? "-translate-y-full focus-within:translate-y-0" : "translate-y-0",
+        solidHeader ? "bg-background/95 shadow-sm backdrop-blur" : "bg-gradient-to-b from-overlay/75 to-transparent",
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3">
         <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
-          <img src={logo.url} alt="Limonson" className="h-14 w-14 rounded-2xl object-cover shadow" />
+          <img src="/favicon.png" alt="Limonson" width={56} height={56} className="h-14 w-14 rounded-2xl object-cover shadow" />
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {nav.map((n) => (
@@ -49,7 +50,7 @@ export function SiteHeader() {
               activeOptions={{ exact: true }}
               className={cn(
                 "rounded-full px-5 py-2 font-display text-lg font-bold transition-colors",
-                scrolled ? "text-foreground hover:bg-secondary" : "text-earth-foreground hover:bg-primary/20",
+                solidHeader ? "text-foreground hover:bg-secondary" : "text-earth-foreground hover:bg-primary/20",
               )}
               activeProps={{ className: "!bg-primary !text-primary-foreground" }}
             >
@@ -58,44 +59,34 @@ export function SiteHeader() {
           ))}
         </nav>
         <button
-          aria-label="Abrir menú"
-          className={cn("rounded-full p-2 md:hidden", scrolled || open ? "text-foreground" : "text-earth-foreground")}
+          type="button"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          className={cn("rounded-full p-3 md:hidden", solidHeader ? "text-foreground" : "text-earth-foreground")}
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X /> : <Menu />}
         </button>
       </div>
-      {open && (
-        <nav className="flex flex-col gap-1 px-5 pb-5 md:hidden">
-          {nav.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              onClick={() => setOpen(false)}
-              activeOptions={{ exact: true }}
-              className="rounded-full px-5 py-3 font-display text-xl font-bold hover:bg-secondary"
-              activeProps={{ className: "bg-primary" }}
-            >
-              {n.label}
-            </Link>
-          ))}
-        </nav>
-      )}
+      <nav
+        id="mobile-navigation"
+        className={cn("flex-col gap-1 px-5 pb-5 md:hidden", open ? "flex" : "hidden")}
+      >
+        {nav.map((n) => (
+          <Link
+            key={n.to}
+            to={n.to}
+            onClick={() => setOpen(false)}
+            activeOptions={{ exact: true }}
+            className="rounded-full px-5 py-3 font-display text-xl font-bold hover:bg-secondary"
+            activeProps={{ className: "bg-primary" }}
+          >
+            {n.label}
+          </Link>
+        ))}
+      </nav>
     </header>
-  );
-}
-
-export function WhatsAppFloat() {
-  return (
-    <a
-      href={whatsappLink()}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Escríbenos por WhatsApp"
-      className="fixed bottom-5 right-5 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-whatsapp text-accent-foreground shadow-xl transition-transform hover:scale-110"
-    >
-      <MessageCircle className="h-8 w-8" />
-    </a>
   );
 }
 
@@ -104,21 +95,24 @@ export function SiteFooter() {
     <footer className="bg-earth text-earth-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3">
         <div className="flex items-center gap-4">
-          <img src={logo.url} alt="Limonson" loading="lazy" className="h-24 w-24 rounded-3xl object-cover" />
+          <img src="/favicon.png" alt="Limonson" loading="lazy" width={64} height={64} className="h-16 w-16 rounded-2xl object-cover" />
           <p className="font-display text-2xl font-extrabold">{SLOGAN}</p>
         </div>
         <ul className="space-y-3">
           <li className="flex items-center gap-3"><MapPin className="h-5 w-5 text-primary" />{LOCATION}</li>
-          <li className="flex items-center gap-3"><Phone className="h-5 w-5 text-primary" />{CONTACT_NAME}</li>
+          <li className="flex items-center gap-3">
+            <Phone className="h-5 w-5 text-primary" />
+            <a href={`tel:${CONTACT_PHONE.replaceAll(" ", "")}`} className="underline-offset-4 hover:underline">{CONTACT_PHONE}</a>
+          </li>
           <li className="flex items-center gap-3">
             <Mail className="h-5 w-5 text-primary" />
-            <Link to="/contacto" className="underline-offset-4 hover:underline">Escríbenos</Link>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="break-all underline-offset-4 hover:underline">{CONTACT_EMAIL}</a>
           </li>
         </ul>
         <div className="flex items-start gap-3 md:justify-end">
-          <a href="#" aria-label="Facebook" className="rounded-full bg-primary p-3 text-primary-foreground transition-transform hover:scale-110"><Facebook className="h-5 w-5" /></a>
-          <a href="#" aria-label="Instagram" className="rounded-full bg-primary p-3 text-primary-foreground transition-transform hover:scale-110"><Instagram className="h-5 w-5" /></a>
-          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="rounded-full bg-primary p-3 text-primary-foreground transition-transform hover:scale-110"><MessageCircle className="h-5 w-5" /></a>
+          <a href={`https://www.instagram.com/${SOCIAL_HANDLE}/`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-4 font-bold text-primary-foreground">
+            <Instagram className="h-5 w-5" aria-hidden="true" /> @{SOCIAL_HANDLE}
+          </a>
         </div>
       </div>
       <p className="border-t border-earth-foreground/15 py-5 text-center text-sm opacity-70">

@@ -65,7 +65,7 @@
   --input: oklch(0.88 0.04 90);
   --ring: oklch(0.62 0.17 135);
   --cream: oklch(0.97 0.03 92);
-  --lime: oklch(0.62 0.17 135);
+  --lime: oklch(0.48 0.13 135);
   --lime-foreground: oklch(0.99 0.01 95);
   --earth: oklch(0.33 0.07 50);
   --earth-foreground: oklch(0.95 0.06 95);
@@ -99,10 +99,53 @@
     color-mix(in oklab, var(--overlay) 45%, transparent) 50%,
     transparent 85%
   );
+  @media (width < 48rem) {
+    background: color-mix(in oklab, var(--overlay) 76%, transparent);
+  }
 }
 
 @utility organic-blob {
   border-radius: 62% 38% 46% 54% / 55% 45% 55% 45%;
+}
+
+@utility lemon-texture {
+  background-image: url("./assets/textura-limones.svg");
+  background-size: 200px 164px;
+}
+
+@utility lemon-photo {
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+@utility lemon-diagonal {
+  mask-image: url("./assets/silueta-limon-diagonal.svg");
+}
+
+@utility lemon-wide {
+  mask-image: url("./assets/silueta-limon-ancho.svg");
+}
+
+@utility lemon-tall {
+  mask-image: url("./assets/silueta-limon-vertical.svg");
+}
+
+@utility lemon-leaf {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 7%;
+    left: 3%;
+    width: 10%;
+    height: 5%;
+    border-radius: 0 80% 0 80%;
+    background: var(--lime);
+    transform: rotate(-38deg);
+    pointer-events: none;
+  }
 }
 
 @utility reveal {
@@ -146,4 +189,20 @@
 }
 @utility animate-float-soft {
   animation: float-soft 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-ken-burns, .animate-page-in {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
