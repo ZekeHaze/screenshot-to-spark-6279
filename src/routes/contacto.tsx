@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
-import { MessageCircle, MapPin, User } from "lucide-react";
+import { Mail, MapPin, Phone, User } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Reveal } from "@/components/site/Reveal";
-import { CONTACT_NAME, LOCATION, whatsappLink } from "@/lib/site";
+import { CONTACT_EMAIL, CONTACT_NAME, CONTACT_PHONE, LOCATION } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/contacto")({
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/contacto")({
       { title: "Contacto — Limonson" },
       { name: "description", content: "Información general, distribución y solicitudes comerciales de Limonson." },
       { property: "og:title", content: "Contacto — Limonson" },
-      { property: "og:description", content: "Escríbenos o contáctanos por WhatsApp." },
+      { property: "og:description", content: "Escríbenos o llámanos para conocer más sobre Limonson." },
     ],
   }),
   component: Contacto,
@@ -44,7 +44,7 @@ function Contacto() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const fd = Object.fromEntries(new FormData(e.currentTarget));
+    const fd = Object.fromEntries(new FormData(form));
     const parsed = schema.safeParse({ ...fd, motivo });
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? "Revisa los datos");
@@ -75,9 +75,13 @@ function Contacto() {
           <ul className="mt-8 space-y-4 text-lg">
             <li className="flex items-center gap-3"><User className="h-6 w-6 text-lime" />{CONTACT_NAME}</li>
             <li className="flex items-center gap-3"><MapPin className="h-6 w-6 text-lime" />{LOCATION}</li>
+            <li className="flex items-center gap-3">
+              <Mail className="h-6 w-6 shrink-0 text-lime" />
+              <a href={`mailto:${CONTACT_EMAIL}`} className="break-all underline underline-offset-4">{CONTACT_EMAIL}</a>
+            </li>
           </ul>
-          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-full bg-whatsapp px-7 py-4 font-display text-lg font-bold text-accent-foreground transition-transform hover:scale-105">
-            <MessageCircle className="h-6 w-6" /> Escríbenos por WhatsApp
+          <a href={`tel:${CONTACT_PHONE.replaceAll(" ", "")}`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3 font-display text-lg font-bold text-lime-foreground">
+            <Phone className="h-5 w-5" /> Llama al {CONTACT_PHONE}
           </a>
         </Reveal>
 
@@ -85,22 +89,37 @@ function Contacto() {
           <form onSubmit={onSubmit} className="space-y-4 rounded-4xl bg-card p-6 shadow-xl md:p-10">
             <div className="flex flex-wrap gap-2">
               {motivos.map((m) => (
-                <button type="button" key={m.id} onClick={() => setMotivo(m.id)}
-                  className={cn("rounded-full px-4 py-2 font-display font-bold transition-colors", motivo === m.id ? "bg-primary text-primary-foreground" : "bg-secondary hover:bg-primary/40")}>
+                <button type="button" key={m.id} onClick={() => setMotivo(m.id)} aria-pressed={motivo === m.id}
+                  className={cn("min-h-11 rounded-full px-4 py-2 font-display font-bold transition-colors", motivo === m.id ? "bg-primary text-primary-foreground" : "bg-secondary hover:bg-primary/40")}>
                   {m.label}
                 </button>
               ))}
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <input name="nombre" placeholder="Nombre *" maxLength={100} required className={field} />
-              <input name="empresa" placeholder="Empresa" maxLength={120} className={field} />
-              <input name="correo" type="email" placeholder="Correo electrónico *" maxLength={255} required className={field} />
-              <input name="telefono" type="tel" placeholder="Teléfono" maxLength={30} className={field} />
+              <label className="grid gap-1 font-semibold">
+                Nombre (obligatorio)
+                <input name="nombre" autoComplete="name" maxLength={100} required className={field} />
+              </label>
+              <label className="grid gap-1 font-semibold">
+                Empresa
+                <input name="empresa" autoComplete="organization" maxLength={120} className={field} />
+              </label>
+              <label className="grid gap-1 font-semibold">
+                Correo (obligatorio)
+                <input name="correo" type="email" autoComplete="email" maxLength={255} required className={field} />
+              </label>
+              <label className="grid gap-1 font-semibold">
+                Teléfono
+                <input name="telefono" type="tel" autoComplete="tel" maxLength={30} className={field} />
+              </label>
             </div>
-            <textarea name="mensaje" placeholder="Mensaje *" rows={5} maxLength={1000} required className={field} />
-            {error && <p className="text-destructive">{error}</p>}
-            {status === "ok" && <p className="font-semibold text-lime">¡Gracias! Recibimos tu mensaje.</p>}
-            {status === "error" && <p className="text-destructive">No se pudo enviar. Intenta de nuevo o escríbenos por WhatsApp.</p>}
+            <label className="grid gap-1 font-semibold">
+              Mensaje (obligatorio)
+              <textarea name="mensaje" rows={5} maxLength={1000} required className={field} />
+            </label>
+            {error && <p role="alert" className="text-destructive">{error}</p>}
+            {status === "ok" && <p role="status" className="font-semibold text-lime">¡Gracias! Recibimos tu mensaje.</p>}
+            {status === "error" && <p role="alert" className="text-destructive">No se pudo enviar. Intenta de nuevo o escríbenos por correo.</p>}
             <button disabled={status === "sending"} className="w-full rounded-full bg-lime px-7 py-4 font-display text-lg font-bold text-lime-foreground transition-transform hover:scale-[1.02] disabled:opacity-60">
               {status === "sending" ? "Enviando…" : "Enviar mensaje"}
             </button>

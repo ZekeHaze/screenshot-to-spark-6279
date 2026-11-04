@@ -13,7 +13,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SiteHeader, SiteFooter, WhatsAppFloat } from "@/components/site/SiteChrome";
+import { SiteHeader, SiteFooter } from "@/components/site/SiteChrome";
 
 function NotFoundComponent() {
   return (
@@ -128,7 +128,6 @@ function RootComponent() {
         <Outlet />
       </main>
       <SiteFooter />
-      <WhatsAppFloat />
     </QueryClientProvider>
   );
 }

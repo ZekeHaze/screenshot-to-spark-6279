@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import campo from "@/assets/campo-limoneros.jpg";
-import canasta from "@/assets/limones-canasta.jpg";
+import cosecha from "@/assets/limonson-cosecha.jpg";
+import huerto from "@/assets/limonson-en-el-huerto.jpg";
 import { Reveal } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/nosotros")({
@@ -48,7 +49,7 @@ function Nosotros() {
   return (
     <>
       <section className="relative flex min-h-[70svh] items-end overflow-hidden">
-        <img src={campo} alt="Limoneros de la familia" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover animate-ken-burns" />
+        <img src={campo} alt="" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover animate-ken-burns" />
         <div className="absolute inset-0 hero-overlay" />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-16 pt-32">
           <p className="font-display text-lg font-bold text-primary">Nosotros</p>
@@ -56,9 +57,9 @@ function Nosotros() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-12 px-5 py-24 md:grid-cols-[1.1fr_1fr] md:items-center">
+      <section className="lemon-texture mx-auto grid max-w-7xl gap-12 px-5 py-24 md:grid-cols-[1.1fr_1fr] md:items-center">
         <Reveal>
-          <p className="font-display text-lg font-bold text-primary">Nuestro origen</p>
+          <p className="font-display text-lg font-bold text-lime">Nuestro origen</p>
           <h2 className="mt-2 text-4xl md:text-5xl">Lo que nos dejó el abuelo</h2>
           <div className="mt-6 space-y-4 text-lg text-muted-foreground">
             <p>
@@ -76,38 +77,30 @@ function Nosotros() {
             </p>
           </div>
         </Reveal>
-        <Reveal delay={150}>
-          <div className="photo-zoom organic-blob aspect-[4/5] shadow-2xl">
-            <img src={canasta} alt="Cosecha de limón Eureka" loading="lazy" width={1200} height={1408} className="h-full w-full object-cover" />
+        <Reveal delay={150} className="drop-shadow-xl">
+          <div className="photo-zoom lemon-photo lemon-wide aspect-square">
+            <img src={cosecha} alt="Limones Eureka recién cosechados en una canasta" loading="lazy" width={1080} height={1350} className="h-full w-full object-cover" />
           </div>
         </Reveal>
       </section>
 
       <section className="bg-secondary py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-[1fr_1.1fr] md:items-center">
-          <Reveal className="order-2 md:order-1">
-            <div className="photo-zoom organic-blob aspect-[4/5] shadow-2xl">
-              <img src={campo} alt="Surcos del limonar familiar" loading="lazy" width={1920} height={1088} className="h-full w-full object-cover" />
+          <Reveal className="order-2 drop-shadow-xl md:order-1">
+            <div className="photo-zoom lemon-photo lemon-tall aspect-[4/5]">
+              <img src={huerto} alt="Integrante de Limonson con dos botellas de jugo en el huerto" loading="lazy" width={1080} height={1350} className="h-full w-full object-cover" />
             </div>
           </Reveal>
           <Reveal delay={150} className="order-1 md:order-2">
-            <p className="font-display text-lg font-bold text-primary">La nueva generación</p>
+            <p className="font-display text-lg font-bold text-lime">La nueva generación</p>
             <h2 className="mt-2 text-4xl md:text-5xl">Una familia joven, el mismo compromiso</h2>
             <div className="mt-6 space-y-4 text-lg text-muted-foreground">
               <p>
-                Somos una familia joven de Navojoa que decidió quedarse en el campo. Tomamos el
-                relevo del abuelo con la misma tierra, pero con nuevas ideas: mejores prácticas de
-                cultivo, más cuidado en cada cosecha y la ilusión de llevar el limón sonorense
-                más lejos.
+                En las cinco hectáreas que heredamos, establecimos una huerta de limón italiano
+                Eureka. Cosechamos, exprimimos y congelamos el jugo en Navojoa.
               </p>
               <p>
-                Entre reuniones de familia, madrugadas en el huerto y cosechas compartidas,
-                Limonson se volvió nuestro proyecto de vida. No es solo un negocio: es la manera
-                de honrar lo que nos dejaron y de construir algo propio para los que vienen después.
-              </p>
-              <p>
-                Cuando compras un limón Limonson, te llevas un poco de esta historia: sudor,
-                herencia y orgullo por el campo de Sonora.
+                Reutilizamos agua del proceso de elaboración para regar nuestras plantas.
               </p>
             </div>
           </Reveal>
