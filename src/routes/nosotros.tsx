@@ -21,6 +21,29 @@ const datos = [
   { n: "Navojoa", t: "Sonora, México" },
 ];
 
+const historia = [
+  {
+    t: "El terreno del abuelo",
+    d: "Nuestro abuelo trabajó las cinco hectáreas de terreno ejidal en Navojoa con esfuerzo y paciencia, convirtiéndolas en el hogar de lo que hoy es nuestro limonar.",
+  },
+  {
+    t: "La herencia",
+    d: "El terreno pasó a manos de la familia junto con sus lecciones: cuidar la tierra, cosechar con honestidad y no rendirse nunca.",
+  },
+  {
+    t: "Llega el limón italiano Eureka",
+    d: "Elegimos el limón italiano Eureka por su jugo y su sabor: la variedad ideal para mostrar lo mejor del campo sonorense.",
+  },
+  {
+    t: "Nace Limonson",
+    d: "La familia joven se une alrededor del proyecto y le pone nombre, orgullo y futuro a la herencia del abuelo.",
+  },
+  {
+    t: "Hoy",
+    d: "Cosechamos y compartimos nuestro limón con más personas, siempre con el mismo cuidado de siempre y la ilusión de crecer.",
+  },
+];
+
 function Nosotros() {
   return (
     <>
