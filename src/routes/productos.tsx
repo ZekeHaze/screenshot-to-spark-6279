@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import presentaciones from "@/assets/limonson-presentaciones.jpg";
+import { ProductQualities } from "@/components/site/ProductQualities";
 import { Reveal } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/productos")({
@@ -26,10 +27,11 @@ function Productos() {
       <section className="bg-cream pb-12 pt-28 md:pb-16 md:pt-36">
         <div className="mx-auto max-w-7xl px-5">
           <p className="font-display text-lg font-bold text-lime">Productos</p>
-          <h1 className="mt-2 max-w-3xl text-4xl sm:text-5xl md:text-6xl">Jugo de limón 100% natural, exprimido y congelado</h1>
+          <h1 className="mt-2 max-w-3xl text-4xl sm:text-5xl md:text-6xl">Jugo de limón exprimido y congelado</h1>
           <p className="mt-5 max-w-xl text-lg text-muted-foreground">
             Elaborado con limón italiano Eureka de Navojoa, Sonora, sin ingredientes añadidos.
           </p>
+          <ProductQualities />
         </div>
       </section>
 
