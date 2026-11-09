@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, MapPin, Mail, Phone, Instagram } from "lucide-react";
+import syrsaLogo from "@/assets/syrsa-logo.svg";
 import { cn } from "@/lib/utils";
 import { CONTACT_EMAIL, CONTACT_PHONE, LOCATION, SLOGAN, SOCIAL_HANDLE } from "@/lib/site";
 
@@ -115,9 +116,28 @@ export function SiteFooter() {
           </a>
         </div>
       </div>
-      <p className="border-t border-earth-foreground/15 py-5 text-center text-sm opacity-70">
-        © {new Date().getFullYear()} Limonson · Jugo de limón italiano Eureka de Navojoa, Sonora
-      </p>
+      <div className="space-y-1 border-t border-earth-foreground/15 px-5 py-5 text-center text-sm">
+        <p className="opacity-70">
+          © {new Date().getFullYear()} Limonson · Jugo de limón italiano Eureka de Navojoa, Sonora
+        </p>
+        <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+          <span>Sitio desarrollado por</span>
+          <a
+            href="https://syrsa.site/"
+            className="inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4"
+          >
+            <img
+              src={syrsaLogo}
+              alt=""
+              width={24}
+              height={24}
+              loading="lazy"
+              className="size-6 rounded-sm bg-background p-0.5"
+            />
+            syrsa.site
+          </a>
+        </p>
+      </div>
     </footer>
   );
 }

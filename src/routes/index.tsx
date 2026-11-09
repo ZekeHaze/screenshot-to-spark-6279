@@ -3,6 +3,7 @@ import { Clock, Home, Leaf, Droplets, ArrowRight } from "lucide-react";
 import campo from "@/assets/campo-limoneros.jpg";
 import botellas from "@/assets/limonson-botellas.jpg";
 import cocina from "@/assets/limonson-en-cocina.jpg";
+import { ProductQualities } from "@/components/site/ProductQualities";
 import { Reveal } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/")({
@@ -30,14 +31,15 @@ function Index() {
       <section className="relative flex min-h-[100svh] items-center overflow-hidden">
         <img src={campo} alt="" width={1920} height={1088} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover animate-ken-burns" />
         <div className="absolute inset-0 hero-overlay" />
-        <div className="relative mx-auto w-full max-w-7xl px-5 pt-24">
+        <div className="relative mx-auto w-full max-w-7xl px-5 pb-10 pt-28 sm:pb-0 sm:pt-24">
           <p className="mb-4 inline-block rounded-full bg-primary px-4 py-1 font-display font-bold text-primary-foreground">Navojoa, Sonora</p>
-          <h1 className="max-w-3xl text-5xl text-earth-foreground sm:text-6xl md:text-7xl">
+          <h1 className="max-w-3xl text-4xl text-earth-foreground sm:text-6xl md:text-7xl">
             El sabor del campo sonorense en cada gota
           </h1>
           <p className="mt-6 max-w-xl text-lg text-earth-foreground/90">
             Jugo de limón italiano Eureka, exprimido y congelado, sin ingredientes añadidos.
           </p>
+          <ProductQualities />
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/productos" className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 font-display text-lg font-bold text-primary-foreground shadow-lg transition-transform hover:scale-105">
               Ver productos <ArrowRight className="h-5 w-5" />
